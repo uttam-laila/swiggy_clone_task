@@ -21,8 +21,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final labelTextStyle =
-        Theme.of(context).textTheme.subtitle2.copyWith(fontSize: 11.0);
     return Scaffold(
       body: _children[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -30,8 +28,8 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: Colors.blue[900],
         unselectedItemColor: Colors.grey,
         currentIndex: selectedIndex,
-        selectedLabelStyle: labelTextStyle,
-        unselectedLabelStyle: labelTextStyle,
+        selectedLabelStyle: TextStyle(fontSize: 11),
+        unselectedLabelStyle: TextStyle(fontSize: 11),
         onTap: (index) {
           setState(() {
             selectedIndex = index;

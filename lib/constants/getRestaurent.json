@@ -1,0 +1,33 @@
+[{
+    "name" : "Meals Out",
+    "imageUrl": "https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "rating" : "4.2",
+    "mins" : "32",
+    "price" : "230",
+    "location" : "Jayanagar | 1.4 KM"
+},
+{
+    "name" : "Burger King",
+    "imageUrl": "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "rating" : "4.0",
+    "mins" : "28",
+    "price" : "200",
+    "location" : "Jayadeva | 2.3 KM"
+},
+{
+    "name" : "Golden Bakery",
+    "imageUrl": "https://images.pexels.com/photos/2144112/pexels-photo-2144112.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "rating" : "4.9",
+    "mins" : "30",
+    "price" : "600",
+    "location" : "Banashankari | 1 KM"
+},
+{
+    "name" : "Haldiram",
+    "imageUrl": "https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "rating" : "3.4",
+    "mins" : "14",
+    "price" : "400",
+    "location" : "Silk Board | 5 KM"
+}
+]
