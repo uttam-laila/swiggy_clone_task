@@ -1,15 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:online_service_app/services/getRestaurentList.dart';
-import 'package:online_service_app/widgets/restaurantLists.dart';
+import 'package:online_service_app/services/getDishes.dart';
+// import 'package:online_service_app/services/getRestaurentList.dart';
+import 'package:online_service_app/widgets/dishList.dart';
+// import 'package:online_service_app/widgets/restaurantLists.dart';
 
-class RestaurantPage extends StatefulWidget {
+class DishPage extends StatefulWidget {
   @override
-  _RestaurantPageState createState() => _RestaurantPageState();
+  _DishPageState createState() => _DishPageState();
 }
 
-class _RestaurantPageState extends State<RestaurantPage> {
+class _DishPageState extends State<DishPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,7 +117,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
               // width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 2.1,
               child: FutureBuilder(
-                future: getRestaurent(),
+                future: getDishes(),
                 builder: (BuildContext _context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
                     var _jsonResponse = jsonDecode(snapshot.data);
@@ -126,13 +128,10 @@ class _RestaurantPageState extends State<RestaurantPage> {
                       itemBuilder: (context, i) {
                         // return Text(i.toString());
                         return GestureDetector(
-                          child: restaurantListItem(
+                          child: dishListItem(
                             imageUrl: _jsonResponse[i]["imageUrl"],
                             name: _jsonResponse[i]["name"],
-                            location: _jsonResponse[i]["location"],
-                            description: _jsonResponse[i]["description"],
-                            rating: _jsonResponse[i]["rating"],
-                            mins: _jsonResponse[i]["mins"],
+                            veg: _jsonResponse[i]["veg"],
                             price: _jsonResponse[i]["price"],
                           ),
                           onTap: () {

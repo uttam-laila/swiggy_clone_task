@@ -4,7 +4,8 @@
     "rating" : "4.2",
     "mins" : "32",
     "price" : "230",
-    "location" : "Jayanagar | 1.4 KM"
+    "location" : "Jayanagar | 1.4 KM",
+    "description" : "South Indian | North Indian"
 },
 {
     "name" : "Burger King",
@@ -12,7 +13,8 @@
     "rating" : "4.0",
     "mins" : "28",
     "price" : "200",
-    "location" : "Jayadeva | 2.3 KM"
+    "location" : "Jayadeva | 2.3 KM",
+    "description" : "Burger | Pizza"
 },
 {
     "name" : "Golden Bakery",
@@ -20,7 +22,8 @@
     "rating" : "4.9",
     "mins" : "30",
     "price" : "600",
-    "location" : "Banashankari | 1 KM"
+    "location" : "Banashankari | 1 KM",
+    "description" : "Cake | Juices"
 },
 {
     "name" : "Haldiram",
@@ -28,6 +31,7 @@
     "rating" : "3.4",
     "mins" : "14",
     "price" : "400",
-    "location" : "Silk Board | 5 KM"
+    "location" : "Silk Board | 5 KM",
+    "description" : "Meals | Roti"
 }
 ]

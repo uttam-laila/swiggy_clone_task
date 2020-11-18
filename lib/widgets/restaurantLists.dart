@@ -4,9 +4,10 @@ Widget restaurantListItem({
   String imageUrl,
   String name,
   String description,
-  double rating,
-  int mins,
-  int price,
+  String rating,
+  String mins,
+  String price,
+  String location,
 }) =>
     Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
@@ -49,17 +50,17 @@ Widget restaurantListItem({
                         color: Color(0xff7e808c),
                         fontWeight: FontWeight.w600,
                       )),
-                  // Container(
-                  //   padding: EdgeInsets.symmetric(vertical: 5),
-                  //   child: Text(
-                  //     "Jayanagar | 1.4 KM",
-                  //     style: TextStyle(
-                  //       fontSize: 12,
-                  //       color: Color(0xff7e808c),
-                  //       fontWeight: FontWeight.w500,
-                  //     ),
-                  //   ),
-                  // ),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    child: Text(
+                      "$location",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Color(0xff7e808c),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
                   Divider(),
                   Container(
                     child: Row(

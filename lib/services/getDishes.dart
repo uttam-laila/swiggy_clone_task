@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-Future<String> getRestaurent() async {
+Future<String> getDishes() async {
   var url = 'https://api.mocki.io/v1/b6d75326';
 
   var response = await http.get(url);
