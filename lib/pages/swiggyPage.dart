@@ -14,7 +14,7 @@ class SwiggyPage extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width / 1.34,
+                  width: MediaQuery.of(context).size.width / 1.5,
                   child: Row(
                     children: [
                       Icon(Icons.location_history),
@@ -30,7 +30,7 @@ class SwiggyPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width / 1.34,
+                  width: MediaQuery.of(context).size.width / 1.5,
                   child: Text(
                     "Unnamed Road, Jayanagar, Bengaluru",
                     style: TextStyle(fontSize: 12),
@@ -41,7 +41,10 @@ class SwiggyPage extends StatelessWidget {
             ),
           ],
         ),
-        actions: [Icon(Icons.ac_unit), Center(child: Text("Offers"))],
+        actions: [Icon(Icons.ac_unit), Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Center(child: Text("Offers")),
+        )],
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
