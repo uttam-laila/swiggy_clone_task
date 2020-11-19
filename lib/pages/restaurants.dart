@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:online_service_app/pages/dishes.dart';
 import 'package:online_service_app/services/getRestaurentList.dart';
 import 'package:online_service_app/widgets/restaurantLists.dart';
 
@@ -13,6 +14,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: Key("restaurentScreen"),
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: true,
@@ -137,6 +139,14 @@ class _RestaurantPageState extends State<RestaurantPage> {
                           ),
                           onTap: () {
                             print(i);
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return DishPage(
+                                title: _jsonResponse[i]["name"],
+                                type: _jsonResponse[i]["description"],
+                                location: _jsonResponse[i]["location"],
+                              );
+                            }));
                           },
                         );
                       },

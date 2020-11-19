@@ -1,12 +1,21 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:online_service_app/bloc/incrementItem.dart';
+import 'package:online_service_app/pages/homePage.dart';
 import 'package:online_service_app/services/getDishes.dart';
 // import 'package:online_service_app/services/getRestaurentList.dart';
 import 'package:online_service_app/widgets/dishList.dart';
 // import 'package:online_service_app/widgets/restaurantLists.dart';
 
 class DishPage extends StatefulWidget {
+  final String title;
+  final String type;
+  final String location;
+
+  const DishPage({Key key, this.title, this.type, this.location})
+      : super(key: key);
+
   @override
   _DishPageState createState() => _DishPageState();
 }
@@ -25,9 +34,9 @@ class _DishPageState extends State<DishPage> {
               width: MediaQuery.of(context).size.width / 1.6,
               child: Row(
                 children: [
-                  Icon(Icons.location_history),
+                  // Icon(Icons.location_history),
                   Text(
-                    "Unnamed Road",
+                    widget.title,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -40,116 +49,254 @@ class _DishPageState extends State<DishPage> {
           ],
         ),
         actions: [
-          Icon(Icons.ac_unit),
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Center(child: Text("Offers")),
-          )
+          Icon(Icons.favorite_outline),
+          Padding(padding: const EdgeInsets.all(4.0), child: Icon(Icons.search))
         ],
       ),
       body: Container(
         // color: Colors.black,
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height / 1.1,
-        child: ListView(
+        child: SingleChildScrollView(
           // scrollDirection: Axis.horizontal,
-          children: <Widget>[
-            // offers start
-            Container(
-              height: MediaQuery.of(context).size.height / 4,
-              // color: Colors.green,
-              width: double.infinity,
-              margin: EdgeInsets.symmetric(vertical: 15),
-              child: ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (_, index) => Container(
-                  color: Colors.red,
-                  height: (MediaQuery.of(context).size.height / 4),
-                  width: (MediaQuery.of(context).size.height / 4),
-                  child: Image(
-                    image: NetworkImage(
-                        "https://img.freepik.com/free-vector/sale-special-offer-price-tags-design_1588-573.jpg?size=338&ext=jpg"),
-                  ),
+          child: Column(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width / 1.2,
+                height: MediaQuery.of(context).size.height / 8,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.title,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Text(widget.type),
+                    Text(widget.location),
+                  ],
                 ),
-                separatorBuilder: (_, index) => Container(width: 5),
               ),
-            ),
-            // offers end
-
-            // swiggy pop start
-            Container(
-              padding: EdgeInsets.all(8.0),
-              height: MediaQuery.of(context).size.width / 5,
-              // color: Colors.blue,
-              width: double.infinity,
-              // margin: EdgeInsets.symmetric(vertical: 15),
-              child: ListView.separated(
-                  // padding: EdgeInsets.symmetric(horizontal: 10),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 4,
-                  itemBuilder: (_, index) => Column(
-                        children: [
-                          Stack(children: [
-                            Container(
-                              width: 50,
-                              height: 30,
-                              alignment: Alignment.topCenter,
-                              color: Colors.red[50],
-                            ),
-                            Align(
-                                alignment: Alignment.topCenter,
-                                child: Icon(Icons.sms_failed_sharp))
-                          ]),
-                          Text("Safety"),
-                        ],
-                      ),
-                  separatorBuilder: (_, index) => Container(
-                        width: 50,
-                        height: 50,
-                      )),
-            ),
-            // swiggy pop end
-
-            // All Restaurants start
-            Container(
-              // width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2.1,
-              child: FutureBuilder(
-                future: getDishes(),
-                builder: (BuildContext _context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    var _jsonResponse = jsonDecode(snapshot.data);
-                    return Container(
-                        // height: MediaQuery.of(context).size.height / 2,
+              Container(
+                // width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 1.2,
+                child: FutureBuilder(
+                  future: getDishes(),
+                  builder: (BuildContext _context, AsyncSnapshot snapshot) {
+                    if (snapshot != null &&
+                        snapshot.hasData != null &&
+                        snapshot.hasData) {
+                      var _jsonResponse = jsonDecode(snapshot.data);
+                      if (_jsonResponse == null) {
+                        return CircularProgressIndicator();
+                      }
+                      return Container(
+                          // height: MediaQuery.of(context).size.height / 2,
+                          // width: MediaQuery.of(context).size.width,
+                          child: Container(
                         child: ListView.builder(
-                      itemCount: _jsonResponse.length,
-                      itemBuilder: (context, i) {
-                        // return Text(i.toString());
-                        return GestureDetector(
-                          child: dishListItem(
-                            imageUrl: _jsonResponse[i]["imageUrl"],
-                            name: _jsonResponse[i]["name"],
-                            veg: _jsonResponse[i]["veg"],
-                            price: _jsonResponse[i]["price"],
-                          ),
-                          onTap: () {
-                            print(i);
+                          itemCount: _jsonResponse.length,
+                          itemBuilder: (context, i) {
+                            // return Text(i.toString());
+                            var imageUrl = _jsonResponse[i]["image"];
+                            var name = _jsonResponse[i]["name"];
+                            var veg = _jsonResponse[i]["veg"];
+                            var price = _jsonResponse[i]["price"];
+                            if (_jsonResponse[i] == null) {
+                              return CircularProgressIndicator();
+                            }
+                            return GestureDetector(
+                              // child: Text(_jsonResponse[i]["price"].toString()),
+                              // child: dishListItem(
+                              //     imageUrl: _jsonResponse[i]["image"],
+                              //     name: _jsonResponse[i]["name"],
+                              //     veg: _jsonResponse[i]["veg"],
+                              //     price: _jsonResponse[i]["price"],
+                              //     context: context),
+                              child: Container(
+                                // height: MediaQuery.of(context).size.height / 2,
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                margin: EdgeInsets.only(bottom: 40),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    // food info start
+                                    Expanded(
+                                      child: Container(
+                                        margin: EdgeInsets.only(left: 15),
+                                        width: double.infinity,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Container(
+                                              height: 32,
+                                              width: 32,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8.0),
+                                                child: Image(
+                                                  image: NetworkImage(
+                                                      "https://github.com/uttam-laila/foodAppTask/blob/master/assets/icons/nvicon.png?raw=true"),
+                                                  color: veg == "1"
+                                                      ? Colors.green
+                                                      : Colors.red,
+                                                ),
+                                              ),
+                                            ),
+                                            Text(name,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: Color(0xFF000000),
+                                                  fontWeight: FontWeight.w600,
+                                                )),
+                                            Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 5),
+                                              child: Text(
+                                                "₹ $price",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Color(0xff7e808c),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    // food info end
+
+                                    // food image container start
+                                    Container(
+                                      child: Stack(
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.center,
+                                            child: Image(
+                                              height: 80,
+                                              width: 80,
+                                              image: NetworkImage(imageUrl),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 64.0, left: 22),
+                                              child: GestureDetector(
+                                                child: Text(
+                                                  " ADD ",
+                                                  style: TextStyle(
+                                                      backgroundColor:
+                                                          Colors.green,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16),
+                                                ),
+                                                onTap: () {
+                                                  setState(() {
+                                                    ++countbloc;
+                                                    pricebloc = pricebloc +
+                                                        int.parse(price);
+                                                    // addValuesToBloc(
+                                                    //     countbloc, pricebloc);
+                                                    cartCountBloc
+                                                        .valueStreamSink
+                                                        .add(countbloc);
+                                                    cartPriceBloc
+                                                        .valueStreamSink
+                                                        .add(pricebloc);
+                                                  });
+                                                  // print(cartPriceBloc.valueStream.isEmpty);
+                                                  Scaffold.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                    duration:
+                                                        Duration(seconds: 4),
+                                                    backgroundColor:
+                                                        Colors.green,
+                                                    content: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        StreamBuilder<int>(
+                                                            stream: cartCountBloc
+                                                                .valueStream,
+                                                            initialData:
+                                                                countbloc,
+                                                            builder: (context,
+                                                                snapshot) {
+                                                              return Text(
+                                                                  "Cart Items: ${snapshot.data}");
+                                                            }),
+                                                        StreamBuilder<int>(
+                                                            stream: cartPriceBloc
+                                                                .valueStream,
+                                                            initialData:
+                                                                pricebloc,
+                                                            builder: (context,
+                                                                snapshot) {
+                                                              return Text(
+                                                                  "Total Price:${snapshot.data}");
+                                                            }),
+                                                        GestureDetector(
+                                                          child: Text(
+                                                              " View Cart ",
+                                                              style: TextStyle(
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .lightGreen)),
+                                                          onTap: () {
+                                                            Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) {
+                                                              return HomePage(
+                                                                  seselectedIndex:
+                                                                      2);
+                                                            }));
+                                                          },
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ));
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    // food image container end
+                                  ],
+                                ),
+                              ),
+                              onTap: () {
+                                print(i);
+                              },
+                            );
                           },
-                        );
-                      },
+                        ),
+                      ));
+                    }
+                    return Center(
+                        child: CircularProgressIndicator(
+                      backgroundColor: Colors.red,
                     ));
-                  }
-                  return Center(
-                      child: CircularProgressIndicator(
-                    backgroundColor: Colors.red,
-                  ));
-                },
+                  },
+                ),
               ),
-            ),
-            // All Restaurants end
-          ],
+            ],
+          ),
+          // All Restaurants end
         ),
       ),
     );

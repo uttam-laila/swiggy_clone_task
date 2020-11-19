@@ -5,6 +5,9 @@ import 'package:online_service_app/pages/searchPage.dart';
 import 'package:online_service_app/pages/swiggyPage.dart';
 
 class HomePage extends StatefulWidget {
+  final int seselectedIndex;
+
+  const HomePage({Key key, this.seselectedIndex}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -17,10 +20,9 @@ class _HomePageState extends State<HomePage> {
     AccountPage(),
   ];
 
-  int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
+    int selectedIndex = widget.seselectedIndex;
     return Scaffold(
       body: _children[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(

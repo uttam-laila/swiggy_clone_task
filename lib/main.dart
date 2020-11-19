@@ -32,7 +32,9 @@ class MyApp extends StatelessWidget {
         shadowColor: _white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: HomePage(
+        seselectedIndex: 0,
+      ),
     );
   }
 }

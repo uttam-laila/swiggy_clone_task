@@ -15,3 +15,4 @@ class IncrementItem extends Bloc {
 }
 
 IncrementItem cartCountBloc = IncrementItem();
+IncrementItem cartPriceBloc = IncrementItem();
