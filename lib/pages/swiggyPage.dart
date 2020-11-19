@@ -54,6 +54,7 @@ class SwiggyPage extends StatelessWidget {
             child: Center(child: Text("Offers")),
           )
         ],
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -68,22 +69,33 @@ class SwiggyPage extends StatelessWidget {
                     return RestaurantPage();
                   }));
                 },
-                child: Container(
-                  height: MediaQuery.of(context).size.height / 4,
-                  color: Color.fromRGBO(121, 23, 23, 0.5),
-                  child: Center(
-                    child: Text(
-                      "Restaurants",
-                      style: TextStyle(fontSize: 24),
+                child: Stack(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(left: 12),
+                      alignment: Alignment.centerLeft,
+                      height: MediaQuery.of(context).size.height / 4,
+                      color: Color.fromRGBO(199, 77, 12, 1),
+                      child: Text(
+                        "Restaurants",
+                        style: TextStyle(fontSize: 24),
+                      ),
+                      // decoration: BoxDecoration(
+                      //   borderRadius: BorderRadius.circular(12),
+                      //   color: Colors.white,
+                      //   boxShadow: [
+                      //     BoxShadow(color: Colors.green, spreadRadius: 3),
+                      //   ],
+                      // ),
                     ),
-                  ),
-                  // decoration: BoxDecoration(
-                  //   borderRadius: BorderRadius.circular(12),
-                  //   color: Colors.white,
-                  //   boxShadow: [
-                  //     BoxShadow(color: Colors.green, spreadRadius: 3),
-                  //   ],
-                  // ),
+                    Container(
+                      padding: EdgeInsets.only(top: 20, right: 20),
+                      alignment: Alignment.centerRight,
+                      height: 140,
+                      child: Image.network(
+                          "https://i.pinimg.com/originals/4c/ee/21/4cee2121c36013527f60f55994b1e679.png"),
+                    )
+                  ],
                 ),
               ),
             ),

@@ -39,19 +39,47 @@ class _HomePageState extends State<HomePage> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: GestureDetector(
+              child: Icon(Icons.home),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return HomePage(seselectedIndex: 0);
+                }));
+              },
+            ),
             label: 'SWIGGY',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            icon: GestureDetector(
+              child: Icon(Icons.search),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return HomePage(seselectedIndex: 1);
+                }));
+              },
+            ),
             label: 'SEARCH',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_shopping_cart),
+            icon: GestureDetector(
+              child: Icon(Icons.add_shopping_cart),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return HomePage(seselectedIndex: 2);
+                }));
+              },
+            ),
             label: 'CART',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
+            icon: GestureDetector(
+              child: Icon(Icons.person_outline),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return HomePage(seselectedIndex: 3);
+                }));
+              },
+            ),
             label: 'ACCOUNT',
           ),
         ],
